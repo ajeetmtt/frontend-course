@@ -1,0 +1,39 @@
+.navbar {
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.menu_Items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.menu_Items li {
+  padding: 10px;
+  border: 1px solid black;
+  list-style: none;
+  border-radius: 10px;
+}
+.menu_Items li:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.product_container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+  padding: 10px;
+  gap: 10px;
+}
+.product {
+  border: 1px solid black;
+  width: 200px;
+  text-align: center;
+}
+.product img {
+  width: 150px;
+}
