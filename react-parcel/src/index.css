@@ -37,3 +37,17 @@
 .product img {
   width: 150px;
 }
+.skelton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 10px;
+  margin: 10px;
+}
+.skelton div {
+  background-color: rgb(239, 238, 238);
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 10px;
+}

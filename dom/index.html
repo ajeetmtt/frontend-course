@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        padding: 10px 5px;
+        background-color: brown;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      #container {
+        margin: 10px;
+      }
+      .box {
+        background-color: blueviolet;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body style="background-color: black; color: white">
+    <button onclick="addDiv()">Click Me</button>
+    <div id="container"></div>
+    <script>
+      function addDiv() {
+        const div = document.querySelector("#container");
+        const newDiv = document.createElement("h1");
+        newDiv.textContent = "Click Me For Delete";
+        newDiv.className = "box";
+        div.appendChild(newDiv);
+        newDiv.addEventListener("click", () => {
+          newDiv.remove();
+        });
+      }
+    </script>
+  </body>
+</html>

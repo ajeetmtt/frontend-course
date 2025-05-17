@@ -1,23 +1,62 @@
 import { useEffect, useState } from "react";
 import Product from "./Product";
+import Skleton from "./Skleton";
 
 const ProductContainer = () => {
   const [listOfProduct, setListOfProduct] = useState([]);
   const [filterOfProduct, setFilterOfProduct] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
-      console.log(data);
-      setListOfProduct(data);
-      setFilterOfProduct(data);
-    })();
+    try {
+      (async () => {
+        setLoading(true);
+        const res = await fetch("https://fakestoreapi.com/products");
+        const data = await res.json();
+
+        setListOfProduct(data);
+        setFilterOfProduct(data);
+      })();
+    } catch (error) {
+      console.log("Error: ", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  if (listOfProduct.length === 0) {
+    return <Skleton />;
+  }
 
   return (
     <>
+      <input
+        type="text"
+        value={searchText}
+        style={{ padding: "10px" }}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
+      <button
+        style={{
+          margin: "10px",
+          padding: "10px",
+          background: "#000",
+          color: "#fff",
+          borderRadius: "10px",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          const filterProduct = listOfProduct.filter((product) =>
+            product?.title.toLowerCase().includes(searchText.toLowerCase())
+          );
+          setFilterOfProduct(filterProduct);
+          setSearchText("");
+        }}
+      >
+        Search
+      </button>
       <button
         style={{
           margin: "10px",
@@ -37,11 +76,9 @@ const ProductContainer = () => {
           newToggle
             ? setFilterOfProduct(filterProduct)
             : setFilterOfProduct(listOfProduct);
-          console.log(toggle);
-          console.log(newToggle);
         }}
       >
-        {toggle ? "Top Rated" : "All Product"}
+        {toggle ? "All Product" : "Top Rated"}
       </button>
       <div className="product_container">
         {filterOfProduct.map((product) => (
