@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import Skleton from "./Skleton";
+import { Link } from "react-router-dom";
 
 const ProductContainer = () => {
   const [listOfProduct, setListOfProduct] = useState([]);
@@ -10,6 +11,7 @@ const ProductContainer = () => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
+    // console.log("log inside useEffect");
     try {
       (async () => {
         setLoading(true);
@@ -26,6 +28,8 @@ const ProductContainer = () => {
     }
   }, []);
 
+  //  console.log("log outside useEffect");
+
   if (listOfProduct.length === 0) {
     return <Skleton />;
   }
@@ -34,8 +38,9 @@ const ProductContainer = () => {
     <>
       <input
         type="text"
-        value={searchText}
+        //  value={searchText}
         style={{ padding: "10px" }}
+        //  onChange={(e) => setSearchText(e.target.value)}
         onChange={(e) => setSearchText(e.target.value)}
       />
       <button
@@ -82,7 +87,9 @@ const ProductContainer = () => {
       </button>
       <div className="product_container">
         {filterOfProduct.map((product) => (
-          <Product key={product.id} product={product} />
+          <Link target="_blank" key={product.id} to={`/${product.id}`}>
+            <Product product={product} />
+          </Link>
         ))}
       </div>
     </>
