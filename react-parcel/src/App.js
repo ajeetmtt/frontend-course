@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 
 const App = () => (
-  <div>
+  <div className="flex h-screen ">
     <Navbar />
     <Outlet />
   </div>

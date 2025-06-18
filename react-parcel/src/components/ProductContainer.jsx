@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Product from "./Product";
+import Product, { Hoc } from "./Product";
 import Skleton from "./Skleton";
 import { Link } from "react-router-dom";
 
@@ -28,6 +28,7 @@ const ProductContainer = () => {
     }
   }, []);
 
+  //const NewComp = Hoc(Product);
   //  console.log("log outside useEffect");
 
   if (listOfProduct.length === 0) {
@@ -35,7 +36,7 @@ const ProductContainer = () => {
   }
 
   return (
-    <>
+    <div className="mt-20 ">
       <input
         type="text"
         //  value={searchText}
@@ -85,14 +86,19 @@ const ProductContainer = () => {
       >
         {toggle ? "All Product" : "Top Rated"}
       </button>
-      <div className="product_container">
+      <div className="grid grid-cols-4 gap-2">
         {filterOfProduct.map((product) => (
           <Link target="_blank" key={product.id} to={`/${product.id}`}>
+            {/* {product.rating.rate >= 4 ? (
+              <NewComp product={product} />
+            ) : (
+              <Product product={product} />
+            )} */}
             <Product product={product} />
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
