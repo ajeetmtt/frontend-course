@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -9,6 +8,8 @@ import Kids from "./pages/Kids";
 import Error from "./pages/Error";
 import ProductContainer from "./components/ProductContainer";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./components/Cart";
+import App from "./App";
 
 const Video = lazy(() => import("./pages/Video"));
 
@@ -31,11 +32,11 @@ const appRouter = createBrowserRouter([
         element: <Women />,
       },
       {
-        path: "/kids",
-        element: <Kids />,
+        path: "/cart",
+        element: <Cart />,
       },
       {
-        path: "/:productID",
+        path: "/product/:productID",
         element: <ProductDetails />,
       },
       {
