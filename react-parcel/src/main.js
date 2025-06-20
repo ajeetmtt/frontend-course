@@ -10,6 +10,7 @@ import ProductContainer from "./components/ProductContainer";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./components/Cart";
 import App from "./App";
+import Login from "./components/Login";
 
 const Video = lazy(() => import("./pages/Video"));
 
@@ -34,6 +35,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "/product/:productID",

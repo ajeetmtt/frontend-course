@@ -30,7 +30,6 @@ const ProductContainer = () => {
 
   const handleSearch = () => {
     if (!searchText.trim()) {
-      // If search text is empty, show all products
       setFilteredProducts(products);
       return;
     }
@@ -71,7 +70,6 @@ const ProductContainer = () => {
               type="text"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search products..."
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
