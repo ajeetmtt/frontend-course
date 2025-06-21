@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { object, string } from "zod";
+
+const loginSchema = object({
+  email: string().email("Invalid Email Address"),
+  password: string().min(8, "Password must be atleast 8 characters"),
+});
 
 const Login = () => {
   //   const [email, setEmail] = useState("");
@@ -7,6 +13,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
   //   const handelEmailChange = (e) => {
   //     setEmail(e.target.value);
   //   };
@@ -20,6 +27,13 @@ const Login = () => {
   };
   const handelLoginSubmit = (e) => {
     e.preventDefault();
+    const result = loginSchema.safeParse(formData);
+    if (!result.success) {
+      const errorField = result.error.formErrors.fieldErrors;
+      setError(errorField);
+      return;
+    }
+    //api call
     // console.log({ email, password });
     console.log(formData);
   };
@@ -45,14 +59,14 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
-                  type="email"
+                  // type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="you@example.com"
                   className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                  required
                 />
+                <p className="text-red-600 text-sm">{error && error.email}</p>
               </div>
 
               <div>
@@ -72,9 +86,10 @@ const Login = () => {
                   placeholder="••••••••"
                   className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
                   type="password"
-                  required
-                  minLength="6"
                 />
+                <p className="text-red-600 text-sm">
+                  {error && error.password}
+                </p>
               </div>
 
               <div>

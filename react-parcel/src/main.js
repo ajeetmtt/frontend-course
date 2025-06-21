@@ -36,10 +36,7 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
+
       {
         path: "/product/:productID",
         element: <ProductDetails />,
@@ -53,6 +50,10 @@ const appRouter = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

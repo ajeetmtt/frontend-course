@@ -1,13 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addItems } from "../app/cartSlice";
+import { addItems, removeItems } from "../app/cartSlice";
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();
-  console.log(product);
+  const { cartItem } = useSelector((state) => state.cart);
+
   const handelCartItem = () => {
     dispatch(addItems(product));
+  };
+  const handelRemoveCartItem = () => {
+    dispatch(removeItems(product.id));
   };
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
@@ -59,12 +63,21 @@ const Product = ({ product }) => {
           </div>
         </div>
       </Link>
-      <button
-        onClick={handelCartItem}
-        className="bg-blue-500 text-white rounded-2xl cursor-pointer py-2 px-4"
-      >
-        Add To Cart
-      </button>
+      {cartItem.some((item) => item.id === product.id) ? (
+        <button
+          onClick={handelRemoveCartItem}
+          className="bg-red-500 text-white rounded-2xl cursor-pointer py-2 px-4"
+        >
+          Remove From Cart
+        </button>
+      ) : (
+        <button
+          onClick={handelCartItem}
+          className="bg-blue-500 text-white rounded-2xl cursor-pointer py-2 px-4"
+        >
+          Add To Cart
+        </button>
+      )}
     </div>
   );
 };
